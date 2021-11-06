@@ -5,9 +5,11 @@ jQuery(document).ready( function() {
 	const room = jQuery('#room').val();
 	let initializeMeet = room === '' || room === undefined;
 	const group_id = jQuery("input#group_id").val();
-
-	autocomplete(jQuery('#room').val());
-
+    
+    if( room ) {
+	    autocomplete(jQuery('#room').val());
+    }
+    
 	jQuery('#send-invite-form #stopCall').on( 'click', function(e) {
 		const data = {
 			'action' : 'members_delete_room',
@@ -193,4 +195,18 @@ jQuery(document).ready( function() {
 	}
 });
 
+function buddymeet_ee_copied_to_clipboard() {
+  var meeting_invite_url = document.getElementById("jitsi-meeting-invite").getAttribute("data-invite-url");
+  navigator.clipboard.writeText(meeting_invite_url);
+  
+  var tooltip = document.getElementById("jitsi-meeting-invite-text");
+  tooltip.innerHTML = "Copied";
+}
+
+function buddymeet_ee_copy_to_clipboard() {
+  setTimeout(() => {     
+    var tooltip = document.getElementById("jitsi-meeting-invite-text");
+    tooltip.innerHTML = "Copy Meeting Invite URL";
+  }, 3000);
+}
 
