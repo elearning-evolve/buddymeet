@@ -112,7 +112,7 @@ Please note that this setting can only be used if you have set up your own Jitsi
 
 == Changelog ==
 = 1.9.0 =
-* Added Version update credits to [eLearning evolve](http://elearningevolve.com/)
+* Updated Plugin version, @credits [eLearning evolve](http://elearningevolve.com/)
 * Added Show all latest available toolbar buttons in Jitsi Meet meeting
 * Added Enable all options in Jitsi meeting settings
 * Added Set responsive width/height for Jitsi meet window
