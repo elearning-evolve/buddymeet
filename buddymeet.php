@@ -7,7 +7,7 @@ Version: 1.9.0
 Requires at least: 4.6.0
 Tags: buddypress
 License: GPL V2
-Author: eLearning evolve <info@elearningevolve.com>
+Author: Themis Dakanalis <tdakanalis@cytech,gr>, eLearning evolve <info@elearningevolve.com>
 Author URI: https://elearningevolve.com/
 Text Domain: buddymeet
 Domain Path: /languages
@@ -433,7 +433,7 @@ if ( ! class_exists( 'BuddyMeet' ) ) :
 			if ( wp_doing_ajax() ) {
 				//when initializing the meet via an ajax request we need to return the script to the caller to
 				//add it in the page
-				echo '<script>' . $script . '</script>';
+				echo '<script>' . esc_html( $script ) . '</script>';
 			} else {
 				$handle = 'buddymeet-jitsi-js';
 				wp_add_inline_script( $handle, $script );

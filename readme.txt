@@ -1,8 +1,8 @@
 === BuddyMeet ===
-Contributors: tdakanalis, eLearning evolve
+Contributors: tdakanalis, adeelraza_786@hotmail.com
 Tags: BuddyMeet, jitsi, video, audio, conference, buddypress
 Requires at least: 4.5
-Tested up to: 5.8.1
+Tested up to: 5.8.2
 Requires PHP: 5.3
 Stable tag: 1.9.0
 License: GPLv2
@@ -112,6 +112,7 @@ Please note that this setting can only be used if you have set up your own Jitsi
 
 == Changelog ==
 = 1.9.0 =
+* Added Version update credits to [eLearning evolve](http://elearningevolve.com/)
 * Added Show all latest available toolbar buttons in Jitsi Meet meeting
 * Added Enable all options in Jitsi meeting settings
 * Added Set responsive width/height for Jitsi meet window

@@ -123,39 +123,6 @@ function buddymeet_check_version() {
 add_action( 'buddymeet_admin_init', 'buddymeet_check_version' );
 
 function buddymeet_default_settings() {
-	$toolbar_buttons = array(
-		//'invite',
-		'camera',
-		'chat',
-		'closedcaptions',
-		'desktop',
-		'download',
-		'etherpad',
-		'filmstrip',
-		'fullscreen',
-		'hangup',
-		'livestreaming',
-		'microphone',
-		'mute-everyone',
-		'mute-video-everyone',
-		'participants-pane',
-		'profile',
-		'raisehand',
-		'recording',
-		'security',
-		'select-background',
-		'settings',
-		'shareaudio',
-		'sharedvideo',
-		'shortcuts',
-		'stats',
-		'tileview',
-		'toggle-camera',
-		'videoquality',
-		'__end',
-	);
-	$toolbar_buttons = implode( ',', $toolbar_buttons );
-
 	return array(
 		'enabled'                     => true,
 		'meet_members_enabled'        => true,
@@ -174,7 +141,7 @@ function buddymeet_default_settings() {
 		'brand_watermark_link'        => '',
 		'settings'                    => 'devices,language,moderator,profile,calendar,sounds',
 		'disable_video_quality_label' => false,
-		'toolbar'                     => $toolbar_buttons,
+		'toolbar'                     => 'camera,chat,closedcaptions,desktop,download,etherpad,filmstrip,fullscreen,hangup,livestreaming,microphone,mute-everyone,mute-video-everyone,participants-pane,profile,raisehand,recording,security,select-background,settings,shareaudio,sharedvideo,shortcuts,stats,tileview,toggle-camera,videoquality,__end',
 	);
 }
 
@@ -384,7 +351,7 @@ function buddymeet_render_jitsi_meet( $room = null, $subject = null ) {
             toolbar = "' . $toolbar . '"
         ]';
 
-	echo do_shortcode( $content );
+	echo do_shortcode( esc_html( $content ) );
 }
 
 function buddymeet_generate_unique_room() {

@@ -305,13 +305,13 @@ class BuddyMeet_Component extends BP_Component {
 
                 bp_notifications_mark_notification( $notification_id, false );
 
-                return apply_filters( 'buddymeet_' . $action . '_notification', '<a href="' . $notification_link . '">' . $text . '</a>', $group_link, $user_fullname, $group->name, $text, $notification_link );
+                return apply_filters( 'buddymeet_' . esc_html( $action ) . '_notification', '<a href="' . esc_url( $notification_link ) . '">' . esc_html( $text ) . '</a>', esc_url( ( $group_link ), esc_html( $user_fullname ), esc_html( $group->name ), esc_html( $text ), esc_url( $notification_link ) );
                 break;
             default:
-                $custom_action_notification = apply_filters( 'buddymeet_' . $action . '_notification', null, $item_id, $secondary_item_id, $total_items, $format );
+                $custom_action_notification = apply_filters( 'buddymeet_' . esc_html( $action ) . '_notification', null, esc_html( $item_id ), esc_html( $secondary_item_id ), esc_html( $total_items ), esc_html( $format ) );
 
                 if ( ! is_null( $custom_action_notification ) ) {
-                    return $custom_action_notification;
+                    return esc_html( $custom_action_notification );
                 }
 
                 break;
