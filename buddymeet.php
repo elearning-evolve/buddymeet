@@ -1,16 +1,14 @@
 <?php
 /**
-Plugin Name: BuddyMeet
-Plugin URI:
-Description: Adds a meeting room with video and audio capabilities to BuddyPress. Powered by <a target="_blank" href="https://jitsi.org/"> Jitsi Meet </a>.
-Version: 1.9.0
-Requires at least: 4.6.0
-Tags: buddypress
-License: GPL V2
-Author: Themis Dakanalis <tdakanalis@cytech,gr>, eLearning evolve <info@elearningevolve.com>
-Author URI: https://elearningevolve.com/
-Text Domain: buddymeet
-Domain Path: /languages
+ * Plugin Name: BuddyMeet
+ * Plugin URI: https://wordpress.org/plugins/buddymeet/
+ * Description: Adds a meeting room with video and audio capabilities to BuddyPress. Powered by <a target="_blank" href="https://jitsi.org/"> Jitsi Meet </a>.
+ * Version: 1.9.0
+ * License: GPL V2
+ * Author: eLearning evolve <info@elearningevolve.com>
+ * Author URI: https://elearningevolve.com/
+ * Text Domain: buddymeet
+ * Domain Path: /languages
 */
 
 // Exit if accessed directly.
@@ -119,6 +117,10 @@ if ( ! class_exists( 'BuddyMeet' ) ) :
 		private function includes() {
 			require( $this->includes_dir . 'buddymeet-actions.php' );
 			require( $this->includes_dir . 'buddymeet-functions.php' );
+
+			if ( is_admin() ) {
+				require( $this->includes_dir . 'buddymeet-admin-class.php' );
+			}
 
 			//TODO CHECK ADMIN INTERFACES
 			/*if( is_admin() ){
@@ -405,7 +407,7 @@ if ( ! class_exists( 'BuddyMeet' ) ) :
 			$params         = wp_parse_args( $params, buddymeet_default_settings() );
 			$hangoutMessage = __( 'The video call has been ended.', 'buddymeet' );
 			$meeting_link   = esc_html( isset( $_GET['room-id'] ) ? $_GET['room-id'] : buddymeet_generate_unique_room() );
-			
+
 			$script = sprintf(
 				$this->get_jitsi_init_template( $meeting_link ),
 				$params['domain'],
