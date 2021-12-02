@@ -405,15 +405,15 @@ if ( ! class_exists( 'BuddyMeet' ) ) :
 			global $wp, $post;
 			$params         = apply_filters( 'buddymeet_custom_settings', $params );
 			$params         = wp_parse_args( $params, buddymeet_default_settings() );
+			$params         = array_map( 'esc_attr', $params );
 			$hangoutMessage = __( 'The video call has been ended.', 'buddymeet' );
-			$meeting_link   = esc_html( isset( $_GET['room-id'] ) ? $_GET['room-id'] : buddymeet_generate_unique_room() );
 
 			$script = sprintf(
-				$this->get_jitsi_init_template( $meeting_link ),
+				$this->get_jitsi_init_template(),
 				$params['domain'],
 				$params['settings'],
 				$params['toolbar'],
-				$params['room'],
+				$params['room'] ? $params['room'] : buddymeet_generate_unique_room(),
 				$params['width'],
 				$params['height'],
 				$params['parent_node'],
@@ -435,33 +435,22 @@ if ( ! class_exists( 'BuddyMeet' ) ) :
 			if ( wp_doing_ajax() ) {
 				//when initializing the meet via an ajax request we need to return the script to the caller to
 				//add it in the page
-				echo '<script>' . esc_html( $script ) . '</script>';
+				echo '<script>' . $script . '</script>';
 			} else {
 				$handle = 'buddymeet-jitsi-js';
 				wp_add_inline_script( $handle, $script );
 			}
 
-			$markup = '<div class="elementor-element elementor-element-edit-mode elementor-element-e71499c elementor-element--toggle-edit-tools elementor-widget elementor-widget-button elementor-element-editable ui-sortable-handle elementor-button-info">
-					<div class="tooltip">
-						<a id="jitsi-meeting-invite" onclick="buddymeet_ee_copied_to_clipboard()" onmouseout="buddymeet_ee_copy_to_clipboard()" data-invite-url="' . get_permalink() . '?room-id=' . $meeting_link . '" class="elementor-button-link elementor-button elementor-size-sm" role="button">
-							<span class="elementor-button-content-wrapper">
-							<span id="jitsi-meeting-invite-text" class="elementor-button-text">Copy Meeting Invite URL</span>
-							</span>
-						</a>
-					</div></div>';
-
-			$markup .= '<div id="jitsi-meet"></div>';
-
-			return $markup;
+			return '<div id="jitsi-meet"></div>';
 		}
 
-		public function get_jitsi_init_template( $meeting_link ) {
+		public function get_jitsi_init_template() {
 			return 'const public_domain = "meet.jit.si";
             const domain = "%1$s";
             const settings = "%2$s"; 
             const toolbar = "%3$s"; 
             const options = {
-				roomName: "' . $meeting_link . '",
+				roomName: "%4$s",
                 parentNode: document.querySelector("%7$s"),
                 configOverwrite: {
 					constraints: {

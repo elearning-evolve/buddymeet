@@ -116,8 +116,7 @@ Please note that this setting can only be used if you have set up your own Jitsi
 * Added Show all latest available toolbar buttons in Jitsi Meet meeting
 * Added Enable all options in Jitsi meeting settings
 * Added Set responsive width/height for Jitsi meet window
-* Added Create unique Room URL on Jitsi meet embed page
-* Added Ability to copy the unique meeting invite URL on the Jitsi meet page
+* Added Create a unique room URL if room param is not specified in buddymeet shortcode
 * Fixed jquery.min.js?ver=3.6.0:2 Uncaught TypeError: Cannot set properties of undefined (setting '_renderItem').
 
 = 1.8.0 =

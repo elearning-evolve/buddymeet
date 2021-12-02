@@ -194,19 +194,3 @@ jQuery(document).ready( function() {
 		}
 	}
 });
-
-function buddymeet_ee_copied_to_clipboard() {
-  var meeting_invite_url = document.getElementById("jitsi-meeting-invite").getAttribute("data-invite-url");
-  navigator.clipboard.writeText(meeting_invite_url);
-  
-  var tooltip = document.getElementById("jitsi-meeting-invite-text");
-  tooltip.innerHTML = "Copied";
-}
-
-function buddymeet_ee_copy_to_clipboard() {
-  setTimeout(() => {     
-    var tooltip = document.getElementById("jitsi-meeting-invite-text");
-    tooltip.innerHTML = "Copy Meeting Invite URL";
-  }, 3000);
-}
-

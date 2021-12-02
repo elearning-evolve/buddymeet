@@ -355,15 +355,30 @@ function buddymeet_render_jitsi_meet( $room = null, $subject = null ) {
 }
 
 function buddymeet_generate_unique_room() {
-	return sprintf(
-		'%04x%04x%04x%04x%04x%04x%04x%04x',
-		mt_rand( 0, 0xffff ),
-		mt_rand( 0, 0xffff ),
-		mt_rand( 0, 0xffff ),
-		mt_rand( 0, 0x0fff ) | 0x4000,
-		mt_rand( 0, 0x3fff ) | 0x8000,
-		mt_rand( 0, 0xffff ),
-		mt_rand( 0, 0xffff ),
-		mt_rand( 0, 0xffff )
+	$page_id = get_the_ID();
+	$room    = get_transient( 'buddymeet_room_store' );
+
+	// Room ID already set for the current page
+	if ( isset( $room[ $page_id ] ) ) {
+		return $room[ $page_id ];
+	}
+
+	$room[ $page_id ] = sanitize_text_field(
+		sprintf(
+			'%04x%04x%04x%04x%04x%04x%04x%04x',
+			mt_rand( 0, 0xffff ),
+			mt_rand( 0, 0xffff ),
+			mt_rand( 0, 0xffff ),
+			mt_rand( 0, 0x0fff ) | 0x4000,
+			mt_rand( 0, 0x3fff ) | 0x8000,
+			mt_rand( 0, 0xffff ),
+			mt_rand( 0, 0xffff ),
+			mt_rand( 0, 0xffff )
+		)
 	);
+
+	// Store room ID for the current page
+	set_transient( 'buddymeet_room_store', $room );
+
+	return $room[ $page_id ];
 }

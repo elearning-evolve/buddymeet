@@ -42,6 +42,6 @@ if(!$current_room || buddymeet_is_member_of_room($user_id, $current_room, $group
             bp_get_template_part('groups/single/buddymeet/members');
     }
 } else {
-    echo '<div id="message" class="error"><p>' . __('This content is only available to invited members.', 'career') . '</p></div>';
+    echo '<div id="message" class="error"><p>' . __('This content is only available to invited members.', 'buddymeet') . '</p></div>';
 }
 
